@@ -12,7 +12,7 @@
 	
 			<h1><%=session.getAttribute("id") %>´Ô ·Î±×¾Æ¿ô ÇÏ½Ã°Ú½À´Ï±î?</h1>
 
-			<button type="submit" value="·Î±×¾Æ¿ô">·Î±×¾Æ¿ô</button>
+			<button type="submit" value="·Î±×¾Æ¿ô">·Î±×¾Æ¿ô2</button>
 		</form>
 </body>
 </html>

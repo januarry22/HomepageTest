@@ -29,11 +29,11 @@
     			<li class=""><a class="nav-link" href="<c:url
     			 value="/Shop/memberlogout.jsp"/>">로그아웃</a></li>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/updateMember.jsp"/>">회원수정</a></li>
+    			 value="/Shop/member/memberInfo.jsp"/>">회원정보</a></li>
     			 </c:otherwise>
     		</c:choose>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/listBoard.jsp"/>">목 록</a>
+    			 value="/Shop/listBoard.jsp"/>">게시판</a>
     			<li class=""><a class="nav-link" href="<c:url
     			 value="/Shop/insertBoard.jsp"/>">등 록</a>
     			<li class=""><a class="nav-link" href="<c:url

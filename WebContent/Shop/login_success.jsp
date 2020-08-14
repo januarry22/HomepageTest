@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,7 @@
 <body>
 
 	<script>
-			alert("<%=session.getAttribute("message")%>");
+		alert("<%=session.getAttribute("message")%>");
 		location.href = "main.jsp";
 	</script>
 </body>

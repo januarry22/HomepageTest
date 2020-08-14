@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
     <%
@@ -19,27 +19,27 @@
     		<c:choose>
     			<c:when test="${empty id}">
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/memberlogin.jsp"/>">·Î±×ÀÎ</a></li>
+    			 value="/Shop/memberlogin.jsp"/>">ë¡œê·¸ì¸</a></li>
    	 			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/member/memberJoin.jsp"/>">È¸¿ø°¡ÀÔ</a></li>
+    			 value="/Shop/member/memberJoin.jsp"/>">íšŒì›ê°€ìž…</a></li>
     			 </c:when> 
     			 
     			 <c:otherwise>
-    			 <li>[<%=id%>]´Ô</li>
+    			 <li>[<%=id%>]ë‹˜</li>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/memberlogout.jsp"/>">·Î±×¾Æ¿ô</a></li>
+    			 value="/Shop/memberlogout.jsp"/>">ë¡œê·¸ì•„ì›ƒ</a></li>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/member/memberInfo.jsp"/>">È¸¿øÁ¤º¸</a></li>
+    			 value="/Shop/member/memberInfo.jsp"/>">íšŒì›ì •ë³´</a></li>
     			 </c:otherwise>
     		</c:choose>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/listBoard.jsp"/>">°Ô½ÃÆÇ</a>
+    			 value="/Shop/listBoard.jsp"/>">ê²Œì‹œíŒ</a>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/insertBoard.jsp"/>">µî ·Ï</a>
+    			 value="/Shop/insertBoard.jsp"/>">ë“± ë¡</a>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/updateBoard.jsp"/>">¼ö Á¤</a>
+    			 value="/Shop/updateBoard.jsp"/>">ìˆ˜ ì •</a>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/deleteBoard.jsp"/>">»è Á¦</a>
+    			 value="/Shop/deleteBoard.jsp"/>">ì‚­ ì œ</a>
  	
     	</ul>
     	</div>

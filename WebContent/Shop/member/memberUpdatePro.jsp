@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8R"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
   <%@page import="com.test.dao.memberDAO"%>
     <%@page import="com.test.dto.joinDTO"%>

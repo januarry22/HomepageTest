@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ page import="java.sql.*"%>
+<%@ page import="com.test.dto.joinDTO" %>
 
 <!DOCTYPE html>
 <html>
@@ -62,9 +63,5 @@
                 </tr>
             </table>
    
-
-
-
-
 </body>
 </html>

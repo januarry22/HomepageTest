@@ -90,7 +90,7 @@ public class memberDAO {
 
 			if (rs.next()) // 입려된 아이디에 해당하는 비번 있을경우
 			{
-				dbPW = rs.getString("password1"); // 비번을 변수에 넣는다.
+				dbPW = rs.getString("passwd1"); // 비번을 변수에 넣는다.
 
 				if (dbPW.equals(passwd1))
 					x = 1; // 비밀번호 db와 비교해서 확인
@@ -121,6 +121,7 @@ public class memberDAO {
 			}
 		}
 	} // end loginCheck()
+	
 
 	public void memberUpdate(joinDTO bean) {
 
@@ -176,6 +177,7 @@ public class memberDAO {
 
 	}
 
+	@SuppressWarnings("null")
 	public joinDTO getUserInfo(String id) {
 
 		Connection conn = null;
@@ -206,14 +208,13 @@ public class memberDAO {
 				bean.setBirth(rs.getString("birth"));
 				bean.setGender(rs.getString("gender"));
 			}
+			
+			return bean;
+
 
 		} catch (Exception sqle) {
-			try {
-				conn.rollback();
-			} catch (SQLException e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
+
+			throw new RuntimeException(sqle.getMessage());
 		} finally {
 			try {
 				if (pstmt != null) {
@@ -231,8 +232,8 @@ public class memberDAO {
 			}
 
 		}
-		return bean;
-
+	
+	
 	}
 
 	@SuppressWarnings("resource")

@@ -15,9 +15,9 @@
 		if(val=="-1"){
 				location.href="main.jsp";
 		}else if(val=="0"){
-			location.href="main.jsp?contentPage=Shop/member/memberUpdate.jsp";
+			location.href="memberUpdate.jsp";
 		}else if(val=="1"){
-			location.href="main.jsp?contentPage=Shop/member/memberDelete.jsp";
+			location.href="memberDelete.jsp";
 		}
 
 		}
@@ -28,8 +28,7 @@
 <body>
 
 	<%
-		String id = session.getAttribute("sessionId").toString();
-	
+		String id = (String)session.getAttribute("sessionID").toString();
 		memberDAO dao=memberDAO.getInstance();
 		joinDTO member=dao.getUserInfo(id);
 		

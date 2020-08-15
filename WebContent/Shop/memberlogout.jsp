@@ -3,18 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
 
 </script>
 </head>
 <body>
-		<form method="post" action="<%=request.getContextPath()%>/shopController/logout.do">
-	
-			<h1><%=session.getAttribute("name") %>님 로그아웃 하시겠습니까?</h1>
+<script type="text/javascript">
+	alert("로그아웃 하시겠습니까?");
+</script>
+	 <%
+        session.invalidate(); // 모든세션정보 삭제
+        response.sendRedirect("main.jsp"); // 로그인 화면으로 다시 돌아간다.
+    %>
 
-			<button type="submit" onclick="btn_submit()" value="로그아웃">로그아웃</button>
-		</form>
+
 </body>
 </html>

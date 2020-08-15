@@ -17,7 +17,7 @@
 
 </head>
 <body>
-  <form name="memberDelete" method="post" action="MainForm.jsp?contentPage=Shop/member/memberDeletepro.jsp"
+  <form name="memberDelete" method="post" action="main.jsp?contentPage=Shop/member/memberDeletepro.jsp"
         onsubmit="return checkValue()">
  
         <table>

@@ -3,8 +3,8 @@ package com.test.board.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.test.member.controller.Action;
-import com.test.member.controller.ActionForward;
+import com.test.member.action.Action;
+import com.test.member.action.ActionForward;
 
 public class BoardFormChangeAction implements Action{
 

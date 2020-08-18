@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+      <%@ page import="java.sql.*"%>
    <%@page import="com.test.dto.joinDTO" %>
      <%@page import="com.test.dao.memberDAO"%>
  
@@ -12,46 +13,40 @@
 <body>
 
 	<%
-		String id = session.getAttribute("sessionId").toString();
+		String id = session.getAttribute("sessionID").toString();
 	
 		memberDAO dao=memberDAO.getInstance();
 		joinDTO member=dao.getUserInfo(id);
 		
 	
 	%>
-  <form method="post" action="main.jsp?contentPage=Shop/member/memberUpdatepro.jsp" 
-                name="userInfo" onsubmit="return checkValue()">
+  <form method="post" action="memberUpdatePro.jsp" name="userInfo">
 
 		<table border="1">
 		<tr>
-			<td>아이디</td>
+			<td id="title">아이디</td>
 			<td><%=member.getId()%></td>
 		</tr>
 		<tr>
-			<td>비밀번호</td>
-			<td><%=member.getPasswd1()%></td>
+			<td id="title">비밀번호</td>
+			<td><input type="password" name="passwd1"></td>
 		</tr>
 		
-		<tr>
-			<td>비밀번호 확인</td>
-			<td>
-			<input type="password" name="passwd2">
-			<input type="button" value="비밀번호확인" onclick=""></td>
-		</tr>
 		
 		<tr>
-			<td>이 름</td>
-			<td><%=member.getName()%></td>
+			<td id="title">이 름</td>
+			<td><input type="text" name="name"></td>
 		</tr>
 		
 		<tr>
 			<td>성별</td>
-			<td><%=member.getGender()%></td>
+			<td><input type="radio" name="gender" value="남">남
+			<input type="radio" name="gender" value="여">여</td>
 		</tr>
 		
 		<tr>
-			<td>생년월일</td>
-			<td><%=member.getBirth()%>
+			<td id="title">생년월일</td>
+			<td><input type="text" name="birth">
 			</td>
 		</tr>
 		
@@ -67,13 +62,13 @@
 		</tr>
 		
 		<tr>
-			<td>주소</td>
-			<td><%=member.getAddr()%></td>
+			<td id="title">주소</td>
+			<td><input type="text" name="addr"></td>
 		</tr>
 		</table>
 		
 		<input type="submit" value="회원 수정">
-		<input type="reset" value="취소" onclick="javascript:window.location='main.jsp'">
+		<input type="reset" value="취소" onclick="javascript:window.location='../main.jsp'">
 	</form>
 
 </body>

@@ -13,7 +13,7 @@
 	function changeForm(val){
 
 		if(val=="-1"){
-				location.href="main.jsp";
+				location.href="../main.jsp";
 		}else if(val=="0"){
 			location.href="memberUpdate.jsp";
 		}else if(val=="1"){
@@ -27,6 +27,11 @@
 </head>
 <body>
 
+
+	<%
+	request.setCharacterEncoding("utf-8");
+
+	%>
 	<%
 		String id = (String)session.getAttribute("sessionID").toString();
 		memberDAO dao=memberDAO.getInstance();
@@ -43,7 +48,7 @@
                     <td>비밀번호</td>
                     <td><%=member.getPasswd1()%></td>
                 </tr>
-                                <tr>
+                <tr>
                     <td>이름</td>
                     <td><%=member.getName()%></td>
                 </tr>
@@ -69,7 +74,6 @@
             <input type="button" value="뒤로" onclick="changeForm(-1)">
 	        <input type="button" value="수정" onclick="changeForm(0)">
 	        <input type="button" value="삭제" onclick="changeForm(1)">
-	
 	
 	
 

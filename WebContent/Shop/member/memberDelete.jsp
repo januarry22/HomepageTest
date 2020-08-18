@@ -13,23 +13,27 @@
                 return false;
             }
         }
+
+        function mainPro(){
+            location.href="../main.jsp";
+        }
     </script>
 
 </head>
 <body>
-  <form name="memberDelete" method="post" action="main.jsp?contentPage=Shop/member/memberDeletepro.jsp"
+  <form name="memberDelete" method="post" action="memberDeletepro.jsp"
         onsubmit="return checkValue()">
  
         <table>
 
             <tr>
                 <td bgcolor="skyblue">비밀번호</td>
-                <td><input type="password" name="password" maxlength="50"></td>
+                <td><input type="password" name="passwd1" maxlength="50"></td>
             </tr>
         </table>
         
         <br> 
-        <input type="button" value="취소" onclick="javascript:window.location='main.jsp'">
+        <input type="button" value="취소" onclick="mainPro()">
         <input type="submit" value="탈퇴" /> 
     </form>
 

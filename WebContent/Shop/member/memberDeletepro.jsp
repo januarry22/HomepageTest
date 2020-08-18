@@ -8,10 +8,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+   <script type="text/javascript">
+        
+        // 로그아웃 담당 JSP로 이동
+        function mainPro(){
+            location.href="../main.jsp";
+        }
+    </script>
 </head>
 <body>
+
+	<%
+	request.setCharacterEncoding("utf-8");
+
+	%>
    <%
-        String id= (String)session.getAttribute("sessionId"); 
+        String id= (String)session.getAttribute("sessionID"); 
         String passwd1 = request.getParameter("passwd1");
         
         // 세션에서 아이디를, DeleteForm.jsp에서 입력받은 비밀번호를 가져온다.
@@ -26,7 +38,7 @@
         <b><font size="4" color="gray">회원정보가 삭제되었습니다.</font></b>
         <br><br><br>
     
-        <input type="button" value="확인" onclick="javascript:window.location='main.jsp'">
+        <input type="button" value="확인" onclick="mainPro()">
     
     <%    
          // 비밀번호가 틀릴경우 - 삭제가 안되었을 경우

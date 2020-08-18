@@ -9,6 +9,16 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+   <script type="text/javascript">
+        
+        function checkPro(val){
+        	if(val=="-1"){
+				location.href="../main.jsp";
+		}else if(val=="0"){
+			location.href="memberlogin.jsp";
+		}
+        }
+    </script>
 </head>
 <body>
 
@@ -62,6 +72,10 @@
                     <td><%=member.getAddr()%></td>
                 </tr>
             </table>
+            
+            <input type="button" value="로그인" onclick="checkPro(0)"/>
+            <input type="button" value="처음으로" onclick="checkPro(-1)"/>
+            
    
 </body>
 </html>

@@ -123,43 +123,42 @@ public class memberDAO {
 	} // end loginCheck()
 	
 
-	public void memberUpdate(joinDTO bean) {
+	public void memberUpdate(joinDTO bean) throws SQLException {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
 		try {
 
-			conn = DBConnection.getConnection();
-
+			
 			StringBuffer sql = new StringBuffer();
-			sql.append("UPDATE shop SET id=?, name=?, passwd1=?, tel1=?, tel2=?, tel3=?, addr=?, birth=? where id=?");
+			sql.append("UPDATE shop SET name=?, passwd1=?, tel1=?, tel2=?, tel3=?, addr=?, gender=?, birth=? where id=?");
 
+			conn = DBConnection.getConnection();
 			pstmt = conn.prepareStatement(sql.toString());
 
 			conn.setAutoCommit(false);
 
-			pstmt.setString(1, bean.getId());
-			pstmt.setString(2, bean.getName());
-			pstmt.setString(3, bean.getPasswd1());
-			pstmt.setString(4, bean.getTel1());
-			pstmt.setString(5, bean.getTel2());
-			pstmt.setString(6, bean.getTel3());
-			pstmt.setString(7, bean.getAddr());
+			
+			pstmt.setString(1, bean.getName());
+			pstmt.setString(2, bean.getPasswd1());
+			pstmt.setString(3, bean.getTel1());
+			pstmt.setString(4, bean.getTel2());
+			pstmt.setString(5, bean.getTel3());
+			pstmt.setString(6, bean.getAddr());
+			pstmt.setString(7, bean.getGender());
 			pstmt.setString(8, bean.getBirth());
-			pstmt.setString(9, bean.getGender());
+			pstmt.setString(9, bean.getId());
 
 			pstmt.executeUpdate();
 
 			conn.commit();
 
 		} catch (Exception sqle) {
-			try {
+			
 				conn.rollback();
-			} catch (SQLException e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
+				throw new RuntimeException(sqle.getMessage());
+				
 		} finally {
 			try {
 				if (pstmt != null) {
@@ -171,13 +170,16 @@ public class memberDAO {
 
 			} catch (Exception e) {
 				// TODO: handle exception
+				throw new RuntimeException(e.getMessage());
+				
 			}
 
 		}
 
 	}
 
-	@SuppressWarnings("null")
+	
+	
 	public joinDTO getUserInfo(String id) {
 
 		Connection conn = null;
@@ -198,6 +200,7 @@ public class memberDAO {
 
 			if (rs.next()) {
 
+				bean=new joinDTO();
 				bean.setId(rs.getString("id"));
 				bean.setPasswd1(rs.getString("passwd1"));
 				bean.setName(rs.getString("name"));
@@ -248,14 +251,14 @@ public class memberDAO {
 
 		try {
 
-			conn = DBConnection.getConnection();
-
-			StringBuffer sql1 = new StringBuffer();
+		StringBuffer sql1 = new StringBuffer();
 			sql1.append("SELECT passwd1 FROM shop WHERE id=?");
 
 			StringBuffer sql2 = new StringBuffer();
 			sql2.append("DELETE FROM shop WHERE id=?");
-
+			
+			conn = DBConnection.getConnection();
+		
 			conn.setAutoCommit(false);
 
 			pstmt = conn.prepareStatement(sql1.toString());
@@ -268,7 +271,7 @@ public class memberDAO {
 				if (dbPass.equals(passwd1)) {
 					pstmt = conn.prepareStatement(sql2.toString());
 					pstmt.setString(1, id);
-					pstmt.executeQuery();
+					pstmt.executeUpdate();
 					conn.commit();
 					x = 1; // 삭제성공
 				} else {
@@ -276,6 +279,7 @@ public class memberDAO {
 				}
 
 			}
+			return x;
 
 		} catch (Exception sqle) {
 			try {
@@ -284,6 +288,8 @@ public class memberDAO {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
+			throw new RuntimeException(sqle.getMessage());
+			
 		} finally {
 			try {
 				if (pstmt != null) {
@@ -298,10 +304,12 @@ public class memberDAO {
 
 			} catch (Exception e) {
 				// TODO: handle exception
+				throw new RuntimeException(e.getMessage());
+				
 			}
 
 		}
-		return x;
+	
 	}
 
 }

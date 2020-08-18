@@ -9,12 +9,25 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+
+   <script type="text/javascript">
+        
+        // 로그아웃 담당 JSP로 이동
+        function mainPro(){
+            location.href="../main.jsp";
+        }
+    </script>
 </head>
 <body>
 
 	
     <jsp:useBean id="member" class="com.test.dto.joinDTO" />
     <jsp:setProperty property="*" name="member"/>    
+    
+	<%
+	request.setCharacterEncoding("utf-8");
+
+	%>
     
     <%
         
@@ -29,9 +42,8 @@
     <br><br>
     <font size="5" color="gray">회원정보가 수정되었습니다.</font>
     <br><br>
-    <input type="button" value="메인으로" onclick="javascript:window.location='main.jsp'"/>
+    <input type="button" value="메인으로" onclick="mainPro()"/>
 
 
-	%>
 </body>
 </html>

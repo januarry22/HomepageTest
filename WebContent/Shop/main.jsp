@@ -1,7 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+   <script type="text/javascript">
+        
+        // 로그아웃 담당 JSP로 이동
+        function logoutPro(){
+            location.href="member/pro/LogoutPro.jsp";
+        }
+    </script>
+
+</head>
+<body>
     <%
     	String id=(String)session.getAttribute("id");
     
@@ -17,31 +32,34 @@
     <div>
     	<ul class="">
     		<c:choose>
-    			<c:when test="${empty id}">
+    			<c:when test="${empty sessionID}">
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/memberlogin.jsp"/>">�α���</a></li>
+    			 value="/Shop/memberlogin.jsp"/>">로그인</a></li>
    	 			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/member/memberJoin.jsp"/>">ȸ������</a></li>
+    			 value="/Shop/member/memberJoin.jsp"/>">회원가입</a></li>
     			 </c:when> 
     			 
     			 <c:otherwise>
-    			 <li>[<%=id%>]��</li>
+    			 <li>[<%=session.getAttribute("sessionID")%>]님</li>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/memberlogout.jsp"/>">�α׾ƿ�</a></li>
+    			 value="/Shop/memberlogout.jsp"/>">로그아웃</a></li>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/updateMember.jsp"/>">ȸ������</a></li>
+    			 value="/Shop/member/memberInfo.jsp"/>">회원정보</a></li>
     			 </c:otherwise>
     		</c:choose>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/listBoard.jsp"/>">�� ��</a>
+    			 value="/Shop/listBoard.jsp"/>">게시판</a>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/insertBoard.jsp"/>">�� ��</a>
+    			 value="/Shop/insertBoard.jsp"/>">등 록</a>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/updateBoard.jsp"/>">�� ��</a>
+    			 value="/Shop/updateBoard.jsp"/>">수 정</a>
     			<li class=""><a class="nav-link" href="<c:url
-    			 value="/Shop/deleteBoard.jsp"/>">�� ��</a>
+    			 value="/Shop/deleteBoard.jsp"/>">삭 제</a>
  	
     	</ul>
     	</div>
     	 </div>
     	</nav>
+    	
+    	</body>
+</html>

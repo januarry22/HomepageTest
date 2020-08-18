@@ -7,24 +7,35 @@ public class joinDTO {
 	private String passwd1;
 
 	private String birth;
-	private Integer tel1, tel2, tel3;
+	private String tel1, tel2, tel3;
 	private String addr;
 	private String gender;
 
-	
-	public joinDTO(String id, String name, String passwd1) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.passwd1 = passwd1;
+
+
+	public void setTel1(String tel1) {
+		this.tel1 = tel1;
 	}
 
-
-	@Override
-	public String toString() {
-		return "joinDTO [id=" + id + ", name=" + name + ", passwd1=" + passwd1 + "]";
+	public void setTel2(String tel2) {
+		this.tel2 = tel2;
 	}
 
+	public String getTel1() {
+		return tel1;
+	}
+
+	public String getTel2() {
+		return tel2;
+	}
+
+	public String getTel3() {
+		return tel3;
+	}
+
+	public void setTel3(String tel3) {
+		this.tel3 = tel3;
+	}
 
 	public joinDTO() {
 
@@ -38,13 +49,7 @@ public class joinDTO {
 		this.birth = birth;
 	}
 
-	public Integer getTel2() {
-		return tel2;
-	}
 
-	public void setTel2(Integer tel2) {
-		this.tel2 = tel2;
-	}
 
 	public String getGender() {
 		return gender;
@@ -78,21 +83,6 @@ public class joinDTO {
 		this.passwd1 = passwd1;
 	}
 
-	public Integer getTel1() {
-		return tel1;
-	}
-
-	public void setTe1(Integer tel1) {
-		this.tel1 = tel1;
-	}
-
-	public Integer getTel3() {
-		return tel3;
-	}
-
-	public void setTel3(Integer tel3) {
-		this.tel3 = tel3;
-	}
 
 	public String getAddr() {
 		return addr;

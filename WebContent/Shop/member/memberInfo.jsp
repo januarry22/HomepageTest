@@ -1,47 +1,45 @@
-<%@page import="com.test.dao.memberDAO"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ page import="java.sql.*"%>
-<%@ page import="com.test.dto.joinDTO" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page import="java.sql.*"%>
+    <%@page import="com.test.dao.memberDAO"%>
+    <%@page import="com.test.dto.joinDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
-   <script type="text/javascript">
-        
-        function checkPro(val){
-        	if(val=="-1"){
+<script type="text/javascript">
+
+	function changeForm(val){
+
+		if(val=="-1"){
 				location.href="../main.jsp";
 		}else if(val=="0"){
-			location.href="memberlogin.jsp";
+			location.href="memberUpdate.jsp";
+		}else if(val=="1"){
+			location.href="memberDelete.jsp";
 		}
-        }
-    </script>
+
+		}
+
+</script>
+
 </head>
 <body>
+
 
 	<%
 	request.setCharacterEncoding("utf-8");
 
 	%>
-	
-	<jsp:useBean id="member" class="com.test.dto.joinDTO"/>
-	<jsp:setProperty property="*" name="member"/>
-	
 	<%
-		memberDAO dao = memberDAO.getInstance();
+		String id = (String)session.getAttribute("sessionID").toString();
+		memberDAO dao=memberDAO.getInstance();
+		joinDTO member=dao.getUserInfo(id);
 		
-		dao.joinMember(member);
-		
+	
 	%>
-	  
-        <b>회원가입이 되었습니다.</b><br>
-        
-        <b><%=member.getId() %></b>님의 회원정보입니다. <br/><br/>
-        
-        <table border="1">
+	<table border="1">
                 <tr>
                     <td>아이디</td>
                     <td><%=member.getId()%></td>
@@ -50,7 +48,7 @@
                     <td>비밀번호</td>
                     <td><%=member.getPasswd1()%></td>
                 </tr>
-                                <tr>
+                <tr>
                     <td>이름</td>
                     <td><%=member.getName()%></td>
                 </tr>
@@ -73,9 +71,11 @@
                 </tr>
             </table>
             
-            <input type="button" value="로그인" onclick="checkPro(0)"/>
-            <input type="button" value="처음으로" onclick="checkPro(-1)"/>
-            
-   
+            <input type="button" value="뒤로" onclick="changeForm(-1)">
+	        <input type="button" value="수정" onclick="changeForm(0)">
+	        <input type="button" value="삭제" onclick="changeForm(1)">
+	
+	
+
 </body>
 </html>

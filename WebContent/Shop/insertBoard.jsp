@@ -1,22 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>°Ô½ÃÆÇ </h3>
+	<h3>ê²Œì‹œíŒ </h3>
 	
 	<hr>
 	<form method="post" action="">
-	<p>Á¦¸ñ : <input type="text" name="sub">
-	<p>³¯Â¥ : <input type="datetime" name="subtime">
-	<p>³»¿ë  
+	<p>ì œëª© : <input type="text" name="sub">
+	<p>ë‚ ì§œ : <input type="datetime" name="subtime">
+	<p>ë‚´ìš©  
 	<p><textarea rows="10" cols="50"></textarea>
 	<br>
-	<p><input type="submit" value="µî ·Ï">
+	<p><input type="submit" value="ë“± ë¡">
 	</form>
 </body>
 </html>

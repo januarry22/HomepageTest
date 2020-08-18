@@ -28,16 +28,14 @@ public class loginCon extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		// »ç¿ëÀÚ°¡ ¿äÃ»ÇÑ URL
+		// ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ URL
 		String url = request.getRequestURL().toString();
 
-		// getRequestURL StringBuffer ·Î µÇ¾îÀÖ¾î¼­ toStringÀ¸·Î º¯È¯ÇØ ÁÖ¾î¾ß ÇÑ´Ù.
-		// ½ºÆ®¸µ.indexOf("°Ë»ö¾î") °Ë»ö¾î¸¦ Ã£Àº À§Ä¡°ª, ¾øÀ¸¸é -1 ¸®ÅÏ
 		
 		try {
 		if (url.indexOf("login.do") != -1) {
 
-			// Æû¿¡¼­ ÀÔ·ÂÇÑ °ª
+			
 			String id = request.getParameter("id");
 			String passwd1 = request.getParameter("passwd1");
 			//System.out.println(id + "," + passwd1);
@@ -47,40 +45,35 @@ public class loginCon extends HttpServlet {
 		
 				name = dao.loginCheck(id, passwd1);
 
-				//System.out.println("ÀÌ¸§ : " + name);
-
-				// ·Î±×ÀÎ ¿©ºÎ
+	
 				String message = new String();
 				String page = new String();
 
 				if (name != null) {
-					message = name + "´Ô ·Î±×ÀÎ ÇÏ¼Ì½À´Ï´Ù.";
+					message = name + "ë‹˜ ë¡œê·¸ì¸ í•˜ì…¨ìŠµë‹ˆë‹¤.";
 					page = "/Shop/login_success.jsp";
 
-					// session °´Ã¼ ÀÎ½ºÅÏ½º
 					HttpSession session = request.getSession();
 					session.setAttribute("id", id);
 					session.setAttribute("message", message);
 				} else {
-					message = "¾ÆÀÌµğ ¶Ç´Â ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.";
+					message = "ì•„ì´ë””ë‚˜ ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.";
 
-					// ·Î±×ÀÎ ÆäÀÌÁö·Î µ¹¾Æ°¨
 					page = "/memberlogin.jsp?message=" + URLEncoder.encode(message, "utf-8");
 				}
 
 				response.sendRedirect(request.getContextPath() + page);
 			} 
 		 else if (url.indexOf("logout.do") != -1) {
-			// session °´Ã¼ ¸¸µé±â
+			// session ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½
+	
 			HttpSession session = request.getSession();
 
 			String page = "/Shop/main.jsp";
 
-			// sessionÀ» ÃÊ±âÈ­
+	
 			session.invalidate();
 
-			// ·Î±×ÀÎ ÆäÀÌÁö·Î µÇµ¹¾Æ°¨
-			String message = "´Ô ·Î±×¾Æ¿ô ÇÏ½Ã°Ú½À´Ï±î?";
 			response.sendRedirect(request.getContextPath() + page);
 		}
 		}

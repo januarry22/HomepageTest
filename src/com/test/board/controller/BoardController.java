@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.test.board.action.BoardFormChangeAction;
-import com.test.member.controller.Action;
-import com.test.member.controller.ActionForward;
+import com.test.member.action.Action;
+import com.test.member.action.ActionForward;
 
 public class BoardController extends HttpServlet{
 

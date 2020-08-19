@@ -9,8 +9,8 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.test.dao.BoardDAO;
 import com.test.dto.BoardBean;
-import com.test.member.controller.Action;
-import com.test.member.controller.ActionForward;
+import com.test.member.action.Action;
+import com.test.member.action.ActionForward;
 
 public class BoardWriteAction implements Action{
 

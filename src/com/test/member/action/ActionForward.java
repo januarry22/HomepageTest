@@ -1,4 +1,4 @@
-package com.test.member.controller;
+package com.test.member.action;
 
 public class ActionForward {
 

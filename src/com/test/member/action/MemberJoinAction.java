@@ -12,7 +12,7 @@ public class MemberJoinAction implements Action {
 	 public ActionForward execute(HttpServletRequest request,
 	            HttpServletResponse response) throws Exception {
 	        
-	        request.setCharacterEncoding("euc-kr"); // 인코딩
+	        request.setCharacterEncoding("utf-8"); // 인코딩
 	        
 	        ActionForward forward = new ActionForward();
 	        

@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,16 +17,15 @@ import com.test.board.action.BoardFormChangeAction;
 import com.test.member.action.Action;
 import com.test.member.action.ActionForward;
 
+
+@WebServlet("*.bo")
 public class BoardController extends HttpServlet{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private HashMap<String, Action> commandMap;
 	
 	 public void init(ServletConfig config) throws ServletException {    
-	        loadProperties("jsp/board/properties/BoardCommand");
+	        loadProperties("com/test/board/properties/BoardCommand");
 	    }
 	    
 	    /**

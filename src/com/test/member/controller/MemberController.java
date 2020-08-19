@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import com.test.member.action.MemberLogoutAction;
 import com.test.member.action.MemberModifyAction;
 import com.test.member.action.MemberModifyFormAction;
 
+@WebServlet("*.do")
 public class MemberController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	 
@@ -61,7 +63,7 @@ public class MemberController extends HttpServlet{
         Action action = null;
         
         // 보여줄 화면 URL
-        String form = "MainForm.jsp?contentPage=Shop/member/";
+        String form = "../member/";
         
         // 커맨드에 해당하는 액션을 실행한다.
         try {
@@ -76,31 +78,31 @@ public class MemberController extends HttpServlet{
             {
                 forward=new ActionForward();
                 forward.setRedirect(false);
-                forward.setNextPath(form+"LoginForm.jsp");
+                forward.setNextPath(form+"memberlogin.jsp");
             }
             else if(command.equals("JoinForm.do"))    // 회원가입화면 이동
             {
                 forward=new ActionForward();
                 forward.setRedirect(false);
-                forward.setNextPath(form+"JoinForm.jsp");
+                forward.setNextPath(form+"memberJoin.jsp");
             }
             else if(command.equals("UserInfoForm.do"))    // 내정보 클릭 - 회원정보화면 이동
             {
                 forward=new ActionForward();
                 forward.setRedirect(false);
-                forward.setNextPath(form+"UserInfoForm.jsp");
+                forward.setNextPath(form+"memberInfo.jsp");
             }
             else if(command.equals("ModifyFrom.do")) // 회원수정화면 이동
             {
                 forward=new ActionForward();
                 forward.setRedirect(false);
-                forward.setNextPath(form+"ModifyFrom.jsp");
+                forward.setNextPath(form+"memberUpdate.jsp");
             }
             else if(command.equals("DeleteForm.do")) // 회원삭제화면 이동
             {
                 forward=new ActionForward();
                 forward.setRedirect(false);
-                forward.setNextPath(form+"DeleteForm.jsp");
+                forward.setNextPath(form+"memberDelete.jsp");
             }
             else if(command.equals("Result.do")) // 각종 처리결과 화면 이동
             {

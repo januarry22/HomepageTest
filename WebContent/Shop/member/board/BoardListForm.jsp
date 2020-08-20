@@ -8,7 +8,7 @@
 <title>Insert title here</title>
    <script type="text/javascript">
         function writeForm(){
-            location.href="BoardWriteForm.bo";
+            location.href="/Shop/member/board/BoardWriteForm.jsp";
         }
     </script>
 
@@ -21,10 +21,11 @@
         <c:if test="${sessionScope.sessionID!=null}">
             <input type="button" value="글쓰기" onclick="writeForm()">
         </c:if>    
+           
     </div>
     <br>
     <div id="board">
-        <table>
+       <table>
             <tr height="30">
                 <td>글번호</td>
                 <td>제목</td>
@@ -32,19 +33,46 @@
                 <td>작성일</td>
                 <td>조회수</td>
             </tr>    
-            <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
+<c:forEach var="board" items="${list}">
+        <tr>
+                <td>
+                ${board.board_num}</td>
+                <td><a href="BoardDetailAction.bo?num=${board.board_num}">
+                   ${board.board_subject}
+                 </a>
+                </td>
+                <td>
+                    ${board.board_id}
+                </td>
+                <td>date</td>
+                <td>${board.hit}</td>
             </tr>
+            </c:forEach>
         </table>
     </div>
+    
+    <!-- 페이지 넘버 부분-->
     <br>
     <div id="pageForm">
-        페이지 번호
+        <c:if test="${startPage != 1}">
+            <a href='BoardListAction.bo?page=${startPage-1}'>[ 이전 ]</a>
+        </c:if>
+        
+        <c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
+            <c:if test="${pageNum == spage}">
+                ${pageNum}&nbsp;
+            </c:if>
+            <c:if test="${pageNum != spage}">
+                <a href='BoardListAction.bo?page=${pageNum}'>${pageNum}&nbsp;</a>
+            </c:if>
+        </c:forEach>
+        
+        <c:if test="${endPage != maxPage }">
+            <a href='BoardListAction.bo?page=${endPage+1 }'>[다음]</a>
+        </c:if>
     </div>
+     
+    <!--  검색 부분 -->
     <br>
     <div id="searchForm">
         <form>

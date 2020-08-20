@@ -43,7 +43,7 @@ public class BoardWriteAction implements Action{
 	            BoardDAO dao = BoardDAO.getInstance();
 	            BoardBean borderData = new BoardBean();
 	            
-	            borderData.setBoard_num(dao.getSeq()); // 시퀀스값 가져와 세팅
+	   //         borderData.setBoard_num(dao.getSeq()); // 시퀀스값 가져와 세팅
 	            borderData.setBoard_id(multi.getParameter("board_id")); // 히든값
 	            borderData.setBoard_subject(multi.getParameter("board_subject"));
 	            borderData.setBoard_content(multi.getParameter("board_content"));
@@ -53,7 +53,7 @@ public class BoardWriteAction implements Action{
 	            
 	            if(result){
 	                forward.setRedirect(true);
-	                forward.setNextPath("BoardListForm.bo");
+	                forward.setNextPath("/Shop/member/board/BoardWriteForm.jsp");
 	            }
 	            
 	        } catch (Exception e) {

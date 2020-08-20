@@ -37,7 +37,7 @@
             }
             else if(value == "6")
             {
-                location.href="BoardListForm.bo";
+                location.href="BoardListAction.bo";
             }
 
 

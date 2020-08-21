@@ -8,7 +8,7 @@ import com.test.member.action.ActionForward;
 
 public class BoardFormChangeAction implements Action{
 
-	 private String form = "../board/";
+	 private String form = "board/";
 	    private String path;
 	    
 	    /**

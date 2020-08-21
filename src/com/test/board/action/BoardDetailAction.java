@@ -20,18 +20,19 @@ public class BoardDetailAction implements Action{
         String num = request.getParameter("num");
         int boardNum = Integer.parseInt(num);
         
-  //      String pageNum = request.getParameter("pageNum");
+        String pageNum = request.getParameter("pageNum");
         
         BoardDAO dao = BoardDAO.getInstance();
         BoardBean board = dao.getDetail(boardNum);
+       
         boolean result = dao.updateCount(boardNum);
         
         request.setAttribute("board", board);
-     //   request.setAttribute("pageNum", pageNum);
+        request.setAttribute("pageNum", pageNum);
         
         if(result){
             forward.setRedirect(false); // 단순한 조회이므로
-            forward.setNextPath("/Shop/member/board/BoardDetailForm.jsp");
+            forward.setNextPath("BoardDetailForm.bo");
         }
         
         return forward;

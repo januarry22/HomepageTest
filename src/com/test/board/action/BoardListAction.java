@@ -63,9 +63,9 @@ public class BoardListAction implements Action{
 	        request.setAttribute("list", list);
 	        
 	        // 단순 조회이므로 forward()사용 (= DB의 상태변화 없으므로) 
-	        forward.setRedirect(false);
-	        forward.setNextPath("/Shop/member/board/BoardListForm.jsp");
-	        
+//	        forward.setRedirect(false);
+//	        forward.setNextPath("/Shop/member/board/BoardListForm.jsp");
+//	        
 	        return forward;
 
 	}

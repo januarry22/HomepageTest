@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+   <script type="text/javascript">
+        function ListForm(){
+        	location.href="BoardListAction.bo";
+        }
+    </script>
+
 </head>
 <body>
  <form method="post" action="BoardWriteAction.bo" name="boardForm" enctype="multipart/form-data">
@@ -42,9 +48,9 @@
 
         <tr align="center" valign="middle">
             <td colspan="5">
-                <input type="reset" value="취소" onclick="javascript:window.location='BoardListForm.bo'">
-                <input type="submit" value="등록" >
-                <input type="button" value="목록" onclick="javascript:window.location='BoardListForm.bo'">            
+                <input type="reset" value="취소" onclick="ListForm()">
+                <input type="submit" value="등록">
+                <input type="button" value="목록" onclick="ListForm()">            
             </td>
         </tr>
 	

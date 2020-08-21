@@ -53,8 +53,11 @@ public class BoardWriteAction implements Action{
 	            
 	            if(result){
 	                forward.setRedirect(true);
-	                forward.setNextPath("/Shop/member/board/BoardWriteForm.jsp");
+	                forward.setNextPath("BoardListAction.bo");
 	            }
+	            
+//	            forward.setRedirect(true);
+//		        forward.setNextPath("../BoardListAction.bo");
 	            
 	        } catch (Exception e) {
 	            e.printStackTrace();

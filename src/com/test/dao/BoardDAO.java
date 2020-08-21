@@ -49,10 +49,14 @@ public class BoardDAO {
 			pstmt.setString(3, board.getBoard_content());
 			pstmt.setString(4, board.getBoard_file());
 
-			pstmt.setInt(5, 0);
-			pstmt.setInt(6, 0);
-			pstmt.setInt(7, 0);
-			pstmt.setInt(8, 0);
+			if (board.getRe_seq()==0) {			//re_seq==0 은 답변글이 없는경우, 즉 부모글
+				pstmt.setInt(6, num);
+			}else {
+				pstmt.setInt(6, board.getRe_ref());
+			}
+				
+			pstmt.setInt(7, board.getRe_lev());
+			pstmt.setInt(8, board.getRe_seq());
 
 			int flag = pstmt.executeUpdate();
 
@@ -62,6 +66,12 @@ public class BoardDAO {
 			}
 
 		} catch (Exception e) {
+            try {
+                conn.rollback();
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+            } 
+
 			throw new RuntimeException(e.getMessage());
 		}
 		close();
@@ -136,7 +146,7 @@ public class BoardDAO {
 				sql.append("(select * from BOARD where BOARD_SUBJECT like ? ");
 				sql.append("order BY RE_REF desc, RE_SEQ asc)) ");
 				sql.append("where rnum>=? and rnum<=?");
-
+	
 				pstmt = conn.prepareStatement(sql.toString());
 				pstmt.setString(1, "%" + condition + "%");
 				pstmt.setInt(2, start);
@@ -318,33 +328,44 @@ public class BoardDAO {
 
 	public BoardBean getDetail(int boardNum) {
 
-		String sql = "SELECT * FROM board WHERE board_num=?";
-
+		BoardBean bean=null;
+		
 		try {
+			conn=DBConnection.getConnection();
+			
+			StringBuffer sql = new StringBuffer();
+				sql.append("SELECT * FROM board WHERE board_num=?");
 
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setInt(1, boardNum);
 
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 
-				BoardBean bean = new BoardBean();
+				bean = new BoardBean();
 				bean.setBoard_num(boardNum);
 				bean.setBoard_id(rs.getString("board_id"));
 				bean.setBoard_subject(rs.getString("board_subject"));
 				bean.setBoard_content(rs.getString("board_content"));
 //				bean.setBoard_file(rs.getString());
+				bean.setHit(rs.getInt("hit"));
+				bean.setRe_ref(rs.getInt("RE_REF"));
+				bean.setRe_lev(rs.getInt("RE_LEV"));
+				bean.setRe_seq(rs.getInt("RE_SEQ"));
+//				bean.setBoard_date(rs.getDate("BOARD_DATE"));
 
-				return bean;
+				
+
 			}
-
+		
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 
-		return null;
+		close();
+		return bean;
 	}
 	
 	public boolean updateCount(int boardNum)
@@ -377,7 +398,77 @@ public class BoardDAO {
         close();
         return result;
     } // end updateCount
+	
+	
+	public boolean updateReSeq(BoardBean bean) {
+		boolean result=false;
+		
+		int ref=bean.getRe_ref();
+		int seq= bean.getRe_seq();
+		
+		try {
+			StringBuffer sql= new StringBuffer();
+			
+			conn=DBConnection.getConnection();
+			conn.setAutoCommit(false);
+			
+			sql.append("UPDATE board SET re_seq = re_seq+1 WHERE re_ref=? re_seq >?");
+			
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, ref);
+			pstmt.setInt(2, seq);
+			
+			int flag = pstmt.executeUpdate();
+			if(flag>0) {
+				result=true;
+				conn.commit();
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			 try {
+	                conn.rollback(); // 오류시 롤백
+	            } catch (SQLException sqle) {
+	                sqle.printStackTrace();
+	            }
+	            throw new RuntimeException(e.getMessage());
+		}
+		
+		close();
+		return result;
+		
+	}
+	
 
+
+
+	public boolean deleteBoard(int boardNum) {
+		// TODO Auto-generated method stub
+		boolean result=false;
+		
+		try {
+			
+			conn=DBConnection.getConnection();
+			conn.setAutoCommit(false);
+			
+			StringBuffer sql=new StringBuffer();
+			sql.append("DELETE FROM board WHERE board_num=?");
+			
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, boardNum);
+			
+			int flag=pstmt.executeUpdate();
+			if(flag>0) {
+				result=true;
+				conn.commit();
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		close();
+		return result;
+	}
 	// DB 자원해제
 	private void close() {
 		try {
@@ -398,4 +489,45 @@ public class BoardDAO {
 		}
 	} // end close()
 
+	public boolean updateBoard(BoardBean border) {
+		// TODO Auto-generated method stub
+		
+		boolean result=false;
+		
+		try{
+			conn=DBConnection.getConnection();
+			conn.setAutoCommit(false);
+			
+			StringBuffer sql= new StringBuffer();
+			
+			sql.append("UPDATE board SET board_subject=?, board_content=? WHERE board_num=?");
+			
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setString(1, border.getBoard_subject());
+			pstmt.setString(2, border.getBoard_content());
+	//		pstmt.setString(3, border.getBoard_file());		//sql에도 빠짐
+			pstmt.setInt(3, border.getBoard_num());
+			
+			int flag=pstmt.executeUpdate();
+			
+			if(flag>0) {
+				result=true;
+				conn.commit();
+			}
+
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			 try {
+	                conn.rollback(); // 오류시 롤백
+	            } catch (SQLException sqle) {
+	                sqle.printStackTrace();
+	            }
+	            throw new RuntimeException(e.getMessage());
+
+		}
+		
+		close();
+		return result;
+	}
 }

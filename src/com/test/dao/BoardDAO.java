@@ -37,26 +37,34 @@ public class BoardDAO {
 
 			StringBuffer sql = new StringBuffer();
 			sql.append(
-					"INSERT INTO BOARD (board_id, board_subject, board_content, board_file, hit, re_ref, re_lev, re_seq) "
-							+ "VALUES(?,?,?,?,?,?,?,?)");
+					"INSERT INTO BOARD (board_id, board_subject, board_content, board_file, re_ref, re_lev, re_seq) "
+							+ "VALUES(?,?,?,?,?,?,?)");
 
 			int num = board.getBoard_num();
+			int ref=board.getRe_ref();
+			int parent= board.getBoard_parent();
 
+			if(parent==0) ref=num; // 부모글일 경우 그룹번호와 동일
+			
 			pstmt = conn.prepareStatement(sql.toString());
 //			pstmt.setInt(1, num);
 			pstmt.setString(1, board.getBoard_id());
 			pstmt.setString(2, board.getBoard_subject());
 			pstmt.setString(3, board.getBoard_content());
 			pstmt.setString(4, board.getBoard_file());
+			pstmt.setInt(6, ref);
+			pstmt.setInt(7, board.getHit());
+			pstmt.setInt(8, parent);
+//			pstmt.setInt(5, board.getHit());
 
-			if (board.getRe_seq()==0) {			//re_seq==0 은 답변글이 없는경우, 즉 부모글
-				pstmt.setInt(6, num);
-			}else {
-				pstmt.setInt(6, board.getRe_ref());
-			}
+//			if (board.getRe_seq()==0) {			//re_seq==0 은 답변글이 없는경우, 즉 부모글
+//				pstmt.setInt(5, num);
+//			}else {
+//				pstmt.setInt(5, board.getRe_ref());
+//			}
 				
-			pstmt.setInt(7, board.getRe_lev());
-			pstmt.setInt(8, board.getRe_seq());
+//			pstmt.setInt(6, board.getRe_lev());
+//			pstmt.setInt(7, board.getRe_seq());
 
 			int flag = pstmt.executeUpdate();
 
@@ -400,44 +408,44 @@ public class BoardDAO {
     } // end updateCount
 	
 	
-	public boolean updateReSeq(BoardBean bean) {
-		boolean result=false;
-		
-		int ref=bean.getRe_ref();
-		int seq= bean.getRe_seq();
-		
-		try {
-			StringBuffer sql= new StringBuffer();
-			
-			conn=DBConnection.getConnection();
-			conn.setAutoCommit(false);
-			
-			sql.append("UPDATE board SET re_seq = re_seq+1 WHERE re_ref=? re_seq >?");
-			
-			pstmt=conn.prepareStatement(sql.toString());
-			pstmt.setInt(1, ref);
-			pstmt.setInt(2, seq);
-			
-			int flag = pstmt.executeUpdate();
-			if(flag>0) {
-				result=true;
-				conn.commit();
-			}
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			 try {
-	                conn.rollback(); // 오류시 롤백
-	            } catch (SQLException sqle) {
-	                sqle.printStackTrace();
-	            }
-	            throw new RuntimeException(e.getMessage());
-		}
-		
-		close();
-		return result;
-		
-	}
+//	public boolean updateReSeq(BoardBean bean) {
+//		boolean result=false;
+//		
+//		int ref=bean.getRe_ref();
+//		int seq= bean.getRe_seq();
+//		
+//		try {
+//			StringBuffer sql= new StringBuffer();
+//			
+//			conn=DBConnection.getConnection();
+//			conn.setAutoCommit(false);
+//			
+//			sql.append("UPDATE board SET re_seq = re_seq + 1 WHERE re_ref=? and re_seq > ?");
+//			
+//			pstmt=conn.prepareStatement(sql.toString());
+//			pstmt.setInt(1, ref);
+//			pstmt.setInt(2, seq);
+//			
+//			int flag = pstmt.executeUpdate();
+//			if(flag>0) {
+//				result=true;
+//				conn.commit();
+//			}
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			 try {
+//	                conn.rollback(); // 오류시 롤백
+//	            } catch (SQLException sqle) {
+//	                sqle.printStackTrace();
+//	            }
+//	            throw new RuntimeException(e.getMessage());
+//		}
+//		
+//		close();
+//		return result;
+//		
+//	}
 	
 
 

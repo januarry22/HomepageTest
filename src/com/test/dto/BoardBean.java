@@ -13,6 +13,15 @@ public class BoardBean {
 	private int re_seq; // 답변글 순서
 	private int hit; // 글 조회수
 	private String reg_date;
+	private int board_parent;
+
+	public int getBoard_parent() {
+		return board_parent;
+	}
+
+	public void setBoard_parent(int board_parent) {
+		this.board_parent = board_parent;
+	}
 
 	public int getBoard_num() {
 		return board_num;

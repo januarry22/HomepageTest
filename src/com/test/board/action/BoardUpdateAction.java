@@ -21,23 +21,18 @@ public class BoardUpdateAction implements Action {
 		ActionForward forward= new ActionForward();
 		
 		String pageNum = request.getParameter("page");
-		
-		
-		
-		
 		int fileSize= 5*1024*1024;
-        // 업로드될 폴더 절대경로
-        String uploadPath = request.getServletContext().getRealPath("/UploadFolder");
-        
+//        // 업로드될 폴더 절대경로
+//        String uploadPath = request.getServletContext().getRealPath("/UploadFolder");
+//        
         try {
-            MultipartRequest multi = new MultipartRequest
-                    (request, uploadPath, fileSize, "euc-kr", new DefaultFileRenamePolicy());
-            
+        	MultipartRequest multi = new MultipartRequest(request, "C:\\upload", fileSize, "utf-8", new DefaultFileRenamePolicy());
+     
             // 파리미터 값을 가져온다.
             int num = Integer.parseInt(multi.getParameter("board_num")); // 글 번호
             String subject = multi.getParameter("board_subject");    // 글 제목
             String content = multi.getParameter("board_content");    // 글 내용
-            String existFile = multi.getParameter("existing_file");    // 기존 첨부 파일
+//            String existFile = multi.getParameter("existing_file");    // 기존 첨부 파일
             
             // 파라미터 값을 자바빈에 세팅한다.
             BoardBean border = new BoardBean();
@@ -46,17 +41,17 @@ public class BoardUpdateAction implements Action {
             border.setBoard_content(content);
             
             // 글 수정 시 업로드된 파일 가져오기
-            Enumeration<String> fileNames = multi.getFileNames();
-            if(fileNames.hasMoreElements())
-            {
-                String fileName = fileNames.nextElement();
-                String updateFile = multi.getFilesystemName(fileName);
-                
-                if(updateFile == null)    // 수정시 새로운 파일을 첨부 안했다면 기존 파일명을 세팅
-                    border.setBoard_file(existFile);
-                else    // 새로운 파일을 첨부했을 경우
-                    border.setBoard_file(updateFile);
-            }
+//            Enumeration<String> fileNames = multi.getFileNames();
+//            if(fileNames.hasMoreElements())
+//            {
+//                String fileName = fileNames.nextElement();
+//                String updateFile = multi.getFilesystemName(fileName);
+//                
+//                if(updateFile == null)    // 수정시 새로운 파일을 첨부 안했다면 기존 파일명을 세팅
+//                    border.setBoard_file(existFile);
+//                else    // 새로운 파일을 첨부했을 경우
+//                    border.setBoard_file(updateFile);
+//            }
             
             BoardDAO dao = BoardDAO.getInstance();
             boolean result = dao.updateBoard(border);

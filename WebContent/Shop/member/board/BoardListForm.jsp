@@ -8,7 +8,7 @@
 <title>Insert title here</title>
    <script type="text/javascript">
         function writeForm(){
-        	location.href="BoardWriteAction.bo";
+        	location.href="BoardWriteForm.bo";
         }
     </script>
 

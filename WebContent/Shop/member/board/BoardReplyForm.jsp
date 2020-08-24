@@ -24,6 +24,10 @@
             <td id="title">작성자</td>
             <td>${sessionScope.sessionID}</td>
         </tr>
+  		 <tr>
+            <td id="title">
+               글번호 </td>
+               <td>${board.board_num}</td>
             <tr>
             <td id="title">
                 제 목

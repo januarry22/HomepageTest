@@ -20,6 +20,7 @@
 <body>
 <div id="wrap">
         <div id="header">
+        
             <jsp:include page="pages/Header.jsp" />
         </div>
         <div id="main">

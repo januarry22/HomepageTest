@@ -23,6 +23,7 @@ public class BoardReplyAction implements Action{
 		
 		String pageNum= request.getParameter("page");
 		
+	//	int num=Integer.parseInt(request.getParameter("board_num"));
 		String id= request.getParameter("board_id");
 		String subject= request.getParameter("board_subject");
 		String content= request.getParameter("board_content");
@@ -30,11 +31,14 @@ public class BoardReplyAction implements Action{
 		int lev= Integer.parseInt(request.getParameter("re_lev"));
 		int seq= Integer.parseInt(request.getParameter("re_seq"));
 		
+		
+		// 답글 중 가장 최근 답글이 위로 올라가게 처리
+		// 답글의 순서인 seq를 1증가 시킴
 		bean.setRe_ref(ref);
 		bean.setRe_seq(seq);
 		dao.updateReSeq(bean);
-		
-		//bean.setBoard_num();
+
+//		bean.setBoard_num(num);
 		bean.setBoard_id(id);
 		bean.setBoard_subject(subject);
 		bean.setBoard_content(content);

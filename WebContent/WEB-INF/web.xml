@@ -30,5 +30,10 @@
   	<servlet-class>com.test.board.controller.BoardController</servlet-class>
   </servlet>
   
+      
+    <servlet>
+  	<servlet-name>CommentController</servlet-name>
+  	<servlet-class>com.test.board.controller.CommentController</servlet-class>
+  </servlet>
 
 </web-app>

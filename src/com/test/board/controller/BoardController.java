@@ -125,30 +125,30 @@ public class BoardController extends HttpServlet{
 	             * forward : 현재 실행중인 페이지와 forwad에 의해 호출될 페이지는 request와 response 객체를 공유
 	             */
 
-	            if(command.equals("BoardWriteAction.bo")) // 게시판 글쓰기
-	            {
-	                forward=new ActionForward();
-	                forward.setRedirect(false);
-	                forward.setNextPath("../member/board/BoardWriteForm.jsp");
-	            }
-	            else if(command.equals("BoardListAction.bo"))    // 게시판 목록
-	            {
-	                forward=new ActionForward();
-	                forward.setRedirect(false);
-	                forward.setNextPath("board/BoardListForm.jsp");
-	            }
-	            else if(command.equals("BoardDetailAction.bo"))    // 게시글 보기
-	            {
-	                forward=new ActionForward();
-	                forward.setRedirect(false);
-	                forward.setNextPath("board/BoardDetailForm.jsp");
-	            }
-	            else if(command.equals("BoardDeleteAction.bo"))    // 게시글 삭제
-	            {
-	                forward=new ActionForward();
-	                forward.setRedirect(false);
-	                forward.setNextPath("BoardListAction.bo");
-	            }
+//	            if(command.equals("BoardWriteAction.bo")) // 게시판 글쓰기
+//	            {
+//	                forward=new ActionForward();
+//	                forward.setRedirect(false);
+//	                forward.setNextPath("../member/board/BoardWriteForm.jsp");
+//	            }
+//	            else if(command.equals("BoardListAction.bo"))    // 게시판 목록
+//	            {
+//	                forward=new ActionForward();
+//	                forward.setRedirect(false);
+//	                forward.setNextPath("board/BoardListForm.jsp");
+//	            }
+//	            else if(command.equals("BoardDetailAction.bo"))    // 게시글 보기
+//	            {
+//	                forward=new ActionForward();
+//	                forward.setRedirect(false);
+//	                forward.setNextPath("board/BoardDetailForm.jsp");
+//	            }
+//	            else if(command.equals("BoardDeleteAction.bo"))    // 게시글 삭제
+//	            {
+//	                forward=new ActionForward();
+//	                forward.setRedirect(false);
+//	                forward.setNextPath("BoardListAction.bo");
+//	            }
 //	            else if(command.equals("BoardReplyFormAction.bo"))    // 게시글 댓글
 //	            {
 //	                forward=new ActionForward();
@@ -161,27 +161,27 @@ public class BoardController extends HttpServlet{
 //	                forward.setRedirect(false);
 //	                forward.setNextPath("../member/board/BoardUpdateForm.jsp");
 //	            }
-	            else if(command.equals("BoardWriteAction.bo")) // 글쓰기 실행
-	            {
-	                action = new BoardWriteAction();
-	                forward = action.execute(request, response);
-	            }
-	            else if(command.equals("BoardListAction.bo")) // 게시글 실행
-	            {
-	                action = new BoardListAction();
-	                forward = action.execute(request, response);
-	            }
-	            else if(command.equals("BoardDetailAction.bo")) // 조회 실행
-	            {
-	                action = new BoardDetailAction();
-	                forward = action.execute(request, response);
-	            }
+//	            else if(command.equals("BoardWriteAction.bo")) // 글쓰기 실행
+//	            {
+//	                action = new BoardWriteAction();
+//	                forward = action.execute(request, response);
+//	            }
+//	            else if(command.equals("BoardListAction.bo")) // 게시글 실행
+//	            {
+//	                action = new BoardListAction();
+//	                forward = action.execute(request, response);
+//	            }
+//	            else if(command.equals("BoardDetailAction.bo")) // 조회 실행
+//	            {
+//	                action = new BoardDetailAction();
+//	                forward = action.execute(request, response);
+//	            }
 	            
-	            else if(command.equals("BoardUpdateFormAction.bo")) // 조회 실행
-	            {
-	                action = new BoardUpdateFormAction();
-	                forward = action.execute(request, response);
-	            }
+//	            else if(command.equals("BoardUpdateFormAction.bo")) // 조회 실행
+//	            {
+//	                action = new BoardUpdateFormAction();
+//	                forward = action.execute(request, response);
+//	            }
 //	            else if(command.equals("BoardUpdateAction.bo")) // 조회 실행
 //	            {
 //	                action = new BoardUpdateAction();
@@ -198,12 +198,12 @@ public class BoardController extends HttpServlet{
 //	                action = new BoardReplyFormAction();
 //	                forward = action.execute(request, response);
 //	            }
-	            else if(command.equals("BoardDeleteAction.bo")) // 삭제 실행
-	            {
-	                action = new BoardDeleteAction();
-	                forward = action.execute(request, response);
-	            }
-	            
+//	            else if(command.equals("BoardDeleteAction.bo")) // 삭제 실행
+//	            {
+//	                action = new BoardDeleteAction();
+//	                forward = action.execute(request, response);
+//	            }
+//	            
 	            
 	            if(forward != null){
                 if (forward.isRedirect()) {

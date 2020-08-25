@@ -36,7 +36,7 @@ public class BoardReplyAction implements Action{
 		// 답글의 순서인 seq를 1증가 시킴
 		bean.setRe_ref(ref);
 		bean.setRe_seq(seq);
-		dao.updateReSeq(bean);
+	//	dao.updateReSeq(bean);
 
 //		bean.setBoard_num(num);
 		bean.setBoard_id(id);

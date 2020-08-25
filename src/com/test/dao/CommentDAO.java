@@ -3,11 +3,10 @@ package com.test.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.test.dbconn.DBConnection;
-import com.test.dto.BoardBean;
 import com.test.dto.CommentBean;
 
 public class CommentDAO {
@@ -61,16 +60,16 @@ public class CommentDAO {
 			conn.setAutoCommit(false);
 			
 			StringBuffer sql= new StringBuffer();
-			sql.append("INSERT INTO board_comment(comment_num, comment_board, comment_id,"
-					+ " comment_date, comment_parent, comment_content) values(?,?,?,sysdate(),?,?)");
+			sql.append("INSERT INTO board_comment(comment_board, comment_id,"
+					+ "  comment_parent, comment_content) values(?,?,?,?)");
 			
 			pstmt= conn.prepareStatement(sql.toString());
-			pstmt.setInt(1, comment.getComment_num());
-			pstmt.setInt(2, comment.getComment_board());
-			pstmt.setString(3, comment.getComment_id());
-//			pstmt.setInt(4, comment.getComment_parent());
-			pstmt.setInt(4, 0);
-			pstmt.setString(5, comment.getComment_content());
+	//		pstmt.setInt(1, comment.getComment_num());
+			pstmt.setInt(1, comment.getComment_board());
+			pstmt.setString(2, comment.getComment_id());
+			pstmt.setInt(3, comment.getComment_parent());
+	//		pstmt.setInt(3, 0);
+			pstmt.setString(4, comment.getComment_content());
 			
 			int flag=pstmt.executeUpdate();
 			
@@ -104,8 +103,7 @@ public class CommentDAO {
 			conn= DBConnection.getConnection();
 			
 			StringBuffer sql = new StringBuffer();
-			sql.append("select comment_num, comment_board, comment_id, comment_content"
-					+ "from board_comment where comment_board =? ");
+			sql.append("select * from board_comment where comment_board =? ");
 			
 			pstmt= conn.prepareStatement(sql.toString());
 			pstmt.setInt(1, boardNum);
@@ -118,7 +116,7 @@ public class CommentDAO {
 				comment.setComment_board(rs.getInt("comment_board"));
 				comment.setComment_id(rs.getString("comment_id"));
 		//		comment.setComment_date(rs.getDate("comment_date"));
-		//		comment.setComment_parent(rs.getInt("comment_parent"));
+				comment.setComment_parent(rs.getInt("comment_parent"));
 				comment.setComment_content(rs.getString("comment_content"));
 				list.add(comment);
 			}
@@ -137,24 +135,98 @@ public class CommentDAO {
 	}
 	
 
-	// DB 자원해제
-	private void close() {
+	
+	public CommentBean getComment(int comment_num) {
+		// TODO Auto-generated method stub
+		
+		CommentBean comment= null;
+		
 		try {
-			if (pstmt != null) {
-				pstmt.close();
-				pstmt = null;
-			}
-			if (conn != null) {
-				conn.close();
-				conn = null;
-			}
-			if (rs != null) {
-				rs.close();
-				rs = null;
+			
+			conn= DBConnection.getConnection();
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("select * from board_comment where comment_num=?");
+			
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, comment_num);
+			
+			rs= pstmt.executeQuery();
+			while(rs.next()) {
+				comment= new CommentBean();
+				
+				comment.setComment_num(rs.getInt("comment_num"));			// 댓글 번호
+				comment.setComment_board(rs.getInt("comment_board"));		// 게시글 번호
+				comment.setComment_id(rs.getString("comment_id"));
+				comment.setComment_parent(rs.getInt("comment_parent"));
+				comment.setComment_content(rs.getString("comment_content"));
+				
 			}
 		} catch (Exception e) {
+			// TODO: handle exception
 			throw new RuntimeException(e.getMessage());
 		}
-	} // end close()
+		
+		close();
+		return comment;
+	}
+	
+	public boolean deleteComment(int comment_num) {
+		// TODO Auto-generated method stub
+		  boolean result = false;
+		  
+	        try {
+	            conn = DBConnection.getConnection();
+	            conn.setAutoCommit(false); // 자동 커밋을 false로 한다.
+	 
+	            StringBuffer sql = new StringBuffer();
+	            sql.append("DELETE FROM board_comment where comment_num=?");
+
+	            
+	            pstmt = conn.prepareStatement(sql.toString());
+	            pstmt.setInt(1, comment_num);
+	            
+	            int flag = pstmt.executeUpdate();
+	            if(flag > 0){
+	                result = true;
+	                conn.commit(); // 완료시 커밋
+	            }    
+	            
+	        } catch (Exception e) {
+	            try {
+	                conn.rollback(); // 오류시 롤백
+	            } catch (SQLException sqle) {
+	                sqle.printStackTrace();
+	            }
+	            throw new RuntimeException(e.getMessage());
+	        }
+	 
+	        close();
+	        return result;
+
+	}
+	
+	// DB 자원해제
+		private void close() {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+					pstmt = null;
+				}
+				if (conn != null) {
+					conn.close();
+					conn = null;
+				}
+				if (rs != null) {
+					rs.close();
+					rs = null;
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		} // end close()
+
+	
+
 
 }

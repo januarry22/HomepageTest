@@ -37,14 +37,14 @@ public class BoardDAO {
 
 			StringBuffer sql = new StringBuffer();
 			sql.append(
-					"INSERT INTO BOARD (board_id, board_subject, board_content, board_file, re_ref, re_lev, re_seq) "
-							+ "VALUES(?,?,?,?,?,?,?)");
+					"INSERT INTO BOARD (board_id, board_subject, board_content, board_file, hit) "
+							+ "VALUES(?,?,?,?,?)");
 
 			int num = board.getBoard_num();
 			int ref=board.getRe_ref();
 			int parent= board.getBoard_parent();
 
-			if(parent==0) ref=num; // 부모글일 경우 그룹번호와 동일
+//			if(parent==0) ref=num; // 부모글일 경우 그룹번호와 동일
 			
 			pstmt = conn.prepareStatement(sql.toString());
 //			pstmt.setInt(1, num);
@@ -52,9 +52,9 @@ public class BoardDAO {
 			pstmt.setString(2, board.getBoard_subject());
 			pstmt.setString(3, board.getBoard_content());
 			pstmt.setString(4, board.getBoard_file());
-			pstmt.setInt(6, ref);
-			pstmt.setInt(7, board.getHit());
-			pstmt.setInt(8, parent);
+//			pstmt.setInt(6, ref);
+			pstmt.setInt(5, board.getHit());
+//			pstmt.setInt(8, parent);
 //			pstmt.setInt(5, board.getHit());
 
 //			if (board.getRe_seq()==0) {			//re_seq==0 은 답변글이 없는경우, 즉 부모글

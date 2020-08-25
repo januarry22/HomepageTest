@@ -10,6 +10,10 @@
         function writeForm(){
         	location.href="BoardWriteForm.bo";
         }
+
+        function HomeForm(){
+        	location.href="MainForm.do";
+        }
     </script>
 
 
@@ -20,6 +24,7 @@
     <div id="topForm">
         <c:if test="${sessionScope.sessionID!=null}">
             <input type="button" value="글쓰기" onclick="writeForm()">
+            <input type="button" value="Home" onclick="HomeForm()">
         </c:if>    
            
     </div>

@@ -136,7 +136,7 @@ public class BoardDAO {
 //				sql.append("FROM");
 //				sql.append(" (select * from board order by RE_REF desc, RE_SEQ asc)) ");
 //				sql.append("where rnum>=? and rnum<=?");
-				sql.append("SELECT * FROM board WHERE board_num between ? and ? ORDER BY board_num DESC");
+				sql.append("SELECT * FROM board WHERE board_num between ? and ? ORDER BY board_num");
 
 				pstmt = conn.prepareStatement(sql.toString());
 				pstmt.setInt(1, start);
@@ -146,15 +146,16 @@ public class BoardDAO {
 				sql.delete(0, sql.toString().length());
 			} else if (opt.equals("0")) // 제목으로 검색
 			{
-				sql.append("select * from ");
-				sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
-				sql.append(", BOARD_CONTENT, BOARD_FILE, hit");
-				sql.append(", RE_REF, RE_LEV, RE_SEQ ");
-				sql.append("FROM ");
-				sql.append("(select * from BOARD where BOARD_SUBJECT like ? ");
-				sql.append("order BY RE_REF desc, RE_SEQ asc)) ");
-				sql.append("where rnum>=? and rnum<=?");
-	
+//				sql.append("select * from ");
+//				sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
+//				sql.append(", BOARD_CONTENT, BOARD_FILE, hit");
+//				sql.append(", RE_REF, RE_LEV, RE_SEQ ");
+//				sql.append("FROM ");
+//				sql.append("(select * from BOARD where BOARD_SUBJECT like ? ");
+//				sql.append("order BY RE_REF desc, RE_SEQ asc)) ");
+				sql.append("select * from board where board_subject like ?");
+				sql.append("ORDER BY board_num LIMIT ? ,?");
+				
 				pstmt = conn.prepareStatement(sql.toString());
 				pstmt.setString(1, "%" + condition + "%");
 				pstmt.setInt(2, start);
@@ -163,14 +164,16 @@ public class BoardDAO {
 				sql.delete(0, sql.toString().length());
 			} else if (opt.equals("1")) // 내용으로 검색
 			{
-				sql.append("select * from ");
-				sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
-				sql.append(", BOARD_CONTENT, BOARD_FILE, hit");
-				sql.append(", RE_REF, RE_LEV, RE_SEQ ");
-				sql.append("FROM ");
-				sql.append("(select * from BOARD where BOARD_CONTENT like ? ");
-				sql.append("order BY RE_REF desc, RE_SEQ asc)) ");
-				sql.append("where rnum>=? and rnum<=?");
+//				sql.append("select * from ");
+//				sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
+//				sql.append(", BOARD_CONTENT, BOARD_FILE, hit");
+//				sql.append(", RE_REF, RE_LEV, RE_SEQ ");
+//				sql.append("FROM ");
+//				sql.append("(select * from BOARD where BOARD_CONTENT like ? ");
+//				sql.append("order BY RE_REF desc, RE_SEQ asc)) ");
+//				sql.append("where rnum>=? and rnum<=?");
+				sql.append("select * from board where board_content like ?");
+				sql.append("ORDER BY board_num LIMIT ? ,?");
 
 				pstmt = conn.prepareStatement(sql.toString());
 				pstmt.setString(1, "%" + condition + "%");
@@ -180,14 +183,16 @@ public class BoardDAO {
 				sql.delete(0, sql.toString().length());
 			} else if (opt.equals("2")) // 제목+내용으로 검색
 			{
-				sql.append("select * from ");
-				sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
-				sql.append(", BOARD_CONTENT, BOARD_FILE, hit");
-				sql.append(", RE_REF, RE_LEV, RE_SEQ ");
-				sql.append("FROM ");
-				sql.append("(select * from BOARD where BOARD_SUBJECT like ? OR BOARD_CONTENT like ? ");
-				sql.append("order BY RE_REF desc, RE_SEQ asc)) ");
-				sql.append("where rnum>=? and rnum<=?");
+//				sql.append("select * from ");
+//				sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
+//				sql.append(", BOARD_CONTENT, BOARD_FILE, hit");
+//				sql.append(", RE_REF, RE_LEV, RE_SEQ ");
+//				sql.append("FROM ");
+//				sql.append("(select * from BOARD where BOARD_SUBJECT like ? OR BOARD_CONTENT like ? ");
+//				sql.append("order BY RE_REF desc, RE_SEQ asc)) ");
+//				sql.append("where rnum>=? and rnum<=?");
+				sql.append("select * from board where board_subject like ? or board_content like ?");
+				sql.append("ORDER BY board_num LIMIT ?, ?");
 
 				pstmt = conn.prepareStatement(sql.toString());
 				pstmt.setString(1, "%" + condition + "%");
@@ -198,14 +203,16 @@ public class BoardDAO {
 				sql.delete(0, sql.toString().length());
 			} else if (opt.equals("3")) // 글쓴이로 검색
 			{
-				sql.append("select * from ");
-				sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
-				sql.append(", BOARD_CONTENT, BOARD_FILE, hit");
-				sql.append(", RE_REF, RE_LEV, RE_SEQ ");
-				sql.append("FROM ");
-				sql.append("(select * from BOARD where BOARD_ID like ? ");
-				sql.append("order BY RE_REF desc, RE_SEQ asc)) ");
-				sql.append("where rnum>=? and rnum<=?");
+//				sql.append("select * from ");
+//				sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
+//				sql.append(", BOARD_CONTENT, BOARD_FILE, hit");
+//				sql.append(", RE_REF, RE_LEV, RE_SEQ ");
+//				sql.append("FROM ");
+//				sql.append("(select * from BOARD where BOARD_ID like ? ");
+//				sql.append("order BY RE_REF desc, RE_SEQ asc)) ");
+//				sql.append("where rnum>=? and rnum<=?");
+//				sql.append("select * from board where board_id like ?");
+				sql.append("SELECT * FROM board WHERE board_id LIKE ? ORDER BY board_num LIMIT ?,?");
 
 				pstmt = conn.prepareStatement(sql.toString());
 				pstmt.setString(1, "%" + condition + "%");
@@ -226,9 +233,9 @@ public class BoardDAO {
 				bean.setBoard_content(rs.getString("board_content"));
 				bean.setBoard_file(rs.getString("board_file"));
 				bean.setHit(rs.getInt("hit"));
-				bean.setRe_lev(rs.getInt("re_lev"));
-				bean.setRe_ref(rs.getInt("re_ref"));
-				bean.setRe_seq(rs.getInt("re_seq"));
+//				bean.setRe_lev(rs.getInt("re_lev"));
+//				bean.setRe_ref(rs.getInt("re_ref"));
+//				bean.setRe_seq(rs.getInt("re_seq"));
 
 				list.add(bean);
 			
@@ -358,9 +365,9 @@ public class BoardDAO {
 				bean.setBoard_content(rs.getString("board_content"));
 //				bean.setBoard_file(rs.getString());
 				bean.setHit(rs.getInt("hit"));
-				bean.setRe_ref(rs.getInt("RE_REF"));
-				bean.setRe_lev(rs.getInt("RE_LEV"));
-				bean.setRe_seq(rs.getInt("RE_SEQ"));
+//				bean.setRe_ref(rs.getInt("RE_REF"));
+//				bean.setRe_lev(rs.getInt("RE_LEV"));
+//				bean.setRe_seq(rs.getInt("RE_SEQ"));
 //				bean.setBoard_date(rs.getDate("BOARD_DATE"));
 
 				

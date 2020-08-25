@@ -43,12 +43,7 @@
        			 <tr>
                 <td>${board.board_num}</td>
                 <td align="left">
-                	<c:if test="${board.re_lev > 0}">
-                		<c:forEach begin="1" end="${board.re_lev}">
-                			&nbsp;&nbsp;
-                		</c:forEach>
-                		RE : 
-                	</c:if>
+
                 	<a href="BoardDetailAction.bo?num=${board.board_num}&pageNum=${spage}">
                    ${board.board_subject}
                  </a>

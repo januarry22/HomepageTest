@@ -136,11 +136,11 @@ public class BoardDAO {
 //				sql.append("FROM");
 //				sql.append(" (select * from board order by RE_REF desc, RE_SEQ asc)) ");
 //				sql.append("where rnum>=? and rnum<=?");
-				sql.append("SELECT * FROM board WHERE board_num between ? and ? ORDER BY board_num");
+				sql.append("SELECT * from(SELECT ROW_number() over() AS rnum ,board_num, board_id, board_subject, board_content, board_file, hit FROM board) AS tb WHERE tb.rnum>=?  AND tb.rnum <=? order by board_num");
 
 				pstmt = conn.prepareStatement(sql.toString());
 				pstmt.setInt(1, start);
-				pstmt.setInt(2, start +9);
+				pstmt.setInt(2, start +2);
 
 				// StringBuffer를 비운다.
 				sql.delete(0, sql.toString().length());
@@ -484,6 +484,7 @@ public class BoardDAO {
 		close();
 		return result;
 	}
+	
 	// DB 자원해제
 	private void close() {
 		try {

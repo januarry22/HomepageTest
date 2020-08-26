@@ -33,9 +33,12 @@ public class MemberModifyAction implements Action {
 		bean.setAddr(request.getParameter("addr"));
 		bean.setBirth(request.getParameter("birth"));
 		bean.setGender(request.getParameter("gender"));
+		//View에서 request한 객체들
 
 		dao.memberUpdate(bean);
+		//dao에 삽입해서 실행
 
+		
 		forward.setRedirect(true);
 		forward.setNextPath("Result.do");
 

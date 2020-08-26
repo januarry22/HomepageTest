@@ -50,6 +50,7 @@ public class BoardWriteAction implements Action{
 	            borderData.setBoard_file(multi.getParameter("board_file"));
 	        
 	            boolean result = dao.boardInsert(borderData);
+	            //dao에서 boardInsert메소드 사용해 새로운 값 넣음
 	            
 	            if(result){
 	                forward.setRedirect(true);

@@ -17,11 +17,11 @@ public class MemberLoginAction implements Action {
         
         // 아이디와 비밀번호를 가져온다.
         String id = request.getParameter("id");
-        String password = request.getParameter("password");
+        String passwd1 = request.getParameter("passwd1");
         
         // DB에서 아이디, 비밀번호 확인
         memberDAO dao = memberDAO.getInstance();
-        int check = dao.loginCheck(id, password);
+        int check = dao.loginCheck(id, passwd1);
         
         if(check == 0)    // 비밀번호 틀릴경우 -> 다시 로그인 화면으로 이동
         { 

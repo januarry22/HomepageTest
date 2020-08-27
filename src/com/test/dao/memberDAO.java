@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.naming.NamingException;
 
 import com.test.dbconn.DBConnection;
+import com.test.dto.BoardBean;
 import com.test.dto.joinDTO;
 
 public class memberDAO {
@@ -311,5 +312,6 @@ public class memberDAO {
 		}
 	
 	}
+
 
 }

@@ -62,7 +62,7 @@
 		</table>
 		
 		<input type="submit" value="회원 가입">
-		<input type="reset" value="취소">
+		<input type="reset" value="취소" onclick="javascript:window.location='MainForm.do'">
 	</form>
 </body>
 </html>

@@ -1,4 +1,4 @@
-# SpringBoot 게시판 만들기
+# SpringBoot Hompage 만들기 
 
 ## 개발 환경
 - SpringBoot 2.x
